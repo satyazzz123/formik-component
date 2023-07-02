@@ -17,8 +17,9 @@ import {
   Checkbox,
   FormGroup,
   FormLabel,
-  Alert,
+  
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 const UserForm = () => {
   const initialValues = {
@@ -86,13 +87,17 @@ const UserForm = () => {
           value={formik.values.country}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.country && Boolean(formik.errors.country)}
+          
         >
           <MenuItem value="USA">USA</MenuItem>
           <MenuItem value="Canada">Canada</MenuItem>
           <MenuItem value="UK">UK</MenuItem>
           <MenuItem value="Australia">Australia</MenuItem>
+          <MenuItem value="Australia">India</MenuItem>
         </Select>
+        {formik.touched.country && Boolean(formik.errors.country) && (
+          <Alert severity="error">{formik.errors.country}</Alert>
+        )}
       </FormControl>
 
       <FormControl component="fieldset">
@@ -104,12 +109,15 @@ const UserForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           row
-          error={formik.touched.gender && Boolean(formik.errors.gender)}
+      
         >
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="male" control={<Radio />} label="Male"  />
           <FormControlLabel value="female" control={<Radio />} label="Female" />
           <FormControlLabel value="other" control={<Radio />} label="Other" />
         </RadioGroup>
+        {formik.touched.gender && Boolean(formik.errors.gender) && (
+          <Alert severity="error">{formik.errors.gender}</Alert>
+        )}
       </FormControl>
 
       <FormControl component="fieldset">
@@ -154,7 +162,7 @@ const UserForm = () => {
         )}
       </FormControl>
 
-      <Button type="submit" variant="contained" color="primary">
+      <Button className={styles.submitbutton} type="submit" variant="contained" color="primary">
         Submit
       </Button>
     </form>
